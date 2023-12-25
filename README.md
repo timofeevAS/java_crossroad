@@ -14,8 +14,8 @@ This repository contains the implementation of a crossroad model.
 To build and run the project, follow these steps:
 
 ```bash
-git clone https://github.com/timofeevAS/java-hometask
-cd java-hometask/task2/
+git clone https://github.com/timofeevAS/java_crossroad
+cd java_crossroad/
 mvn package
 ```
 
