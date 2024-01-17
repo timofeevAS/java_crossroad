@@ -37,17 +37,23 @@ public class Semaphore {
                 }
 
                 Car priorityCar = queue.poll();
-                System.out.println("Go " + priorityCar);
+                long driveTime = (long) (300 + Math.random()*1200); // In range [300;1500] ms
+                Thread.sleep(driveTime);
+                System.out.println("Priority car drive (time: " + driveTime + "): " + priorityCar);
 
                 Iterator<Car> iterator = queue.iterator();
                 while (iterator.hasNext()) {
                     Car car = iterator.next();
-                    if (!car.isIntersect(priorityCar)) {
-                        System.out.println("Also go " + car);
+
+                    if (car.canDrive(priorityCar)) {
+                        driveTime = (long) (300 + Math.random()*1200); // In range [300;1500] ms
+                        Thread.sleep(driveTime);
+                        System.out.println("Also car drive (time: " + driveTime + "): " + car);
                         iterator.remove();
                     }
                 }
                 System.out.println("------------------------");
+                System.out.println(queue);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             } finally {

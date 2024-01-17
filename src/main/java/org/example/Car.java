@@ -1,46 +1,43 @@
 package org.example;
 
 public class Car {
-    private String direction;
-    /* Direction of car, example:
-    * SN
-    * NS
-    * WE
-    * EW
-    * ES
-    *  */
+    private Direction direction;
 
-    public Car(String direction){
+    public Car(Direction direction){
         this.direction = direction;
     }
 
-    public String getDirection(){
+    public Direction getDirection(){
         return this.direction;
     }
 
-    public boolean isIntersect(Car car){
-        if(car == null) return false;
-        String carDir = car.getDirection();
-
-        if(carDir == this.direction){
+    public boolean canDrive(Car car){
+        if(car == null){
             return false;
         }
 
-        if (this.direction.startsWith("S")){
-            return !carDir.startsWith("N");
+        // Direcion of car to check intersection
+        Direction carDirection = car.getDirection();
+
+        if(carDirection.equals(this.direction)){
+            return true;
         }
-        else if(carDir.startsWith("N")){
-            return !carDir.startsWith("S");
+
+        if(this.direction.equals(Direction.SN)){
+            return carDirection.equals(Direction.NS);
         }
-        else if(carDir.startsWith("W")){
-            return carDir.startsWith("EW");
+        else if(this.direction.equals(Direction.NS)){
+            return carDirection.equals(Direction.SN);
         }
-        else if(carDir.startsWith("E")){
-            return carDir.startsWith("N");
-        }
-        else{
+        else if(this.direction.equals(Direction.WE)){
+            return false;
+        }else if(this.direction.equals(Direction.ES)){
+            return carDirection.equals(Direction.NS);
+        }else{
             return false;
         }
+
+
     }
 
     public String toString(){
